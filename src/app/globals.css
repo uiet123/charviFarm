@@ -2,15 +2,19 @@
 
 @theme {
   --color-brand-gold: #D4AF37;
-  --color-brand-green: #2E4C33;
-  --color-brand-cream: #FDFBF7;
-  --color-brand-dark: #1A2E20;
+  --color-brand-brown: #5C3A21;
+  --color-brand-brown-dark: #3E2714;
+  --color-brand-brown-light: #7A5233;
+  --color-brand-cream: #f5f0e8;
+  --color-brand-cream-light: #faf7f2;
+  --color-brand-dark: #2C1A0E;
+  --color-brand-white: #FFFFFF;
 }
 
 @layer base {
   :root {
-    --background: #FDFBF7;
-    --foreground: #1A2E20;
+    --background: #f5f0e8;
+    --foreground: #2C1A0E;
   }
 }
 
@@ -21,9 +25,13 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.font-playfair {
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
 }
 
 /* Custom utility classes */
@@ -31,4 +39,24 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Animations */
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); }
 }
