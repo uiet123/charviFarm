@@ -38,7 +38,7 @@ export function ProductsSection() {
               className="group"
             >
               <Link href="/product/ghee" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.12)] hover:-translate-y-2 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
-                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f0ebe2]">
+                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
                   <Image src="/products/ghee/ghee1.jpeg" alt="Pure Desi Buffalo Ghee" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                   <div className="absolute top-3 left-3 bg-[#D4AF37] text-[#2C1A0E] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-md shadow-md">
                     Best Seller
@@ -92,7 +92,7 @@ export function ProductsSection() {
               className="group"
             >
               <Link href="/product/curd" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.08)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
-                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f0ebe2]">
+                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
                   <Image src="/products/curd/curd1.jpeg" alt="Fresh & Thick Curd" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                 </div>
                 <div className="p-5 md:p-6 flex flex-col flex-grow text-center">
@@ -118,7 +118,7 @@ export function ProductsSection() {
               className="group"
             >
               <Link href="/product/oil" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.08)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
-                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f0ebe2]">
+                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
                   <Image src="/products/oil/oil1.jpeg" alt="Pure Sarso Oil" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                 </div>
                 <div className="p-5 md:p-6 flex flex-col flex-grow text-center">
@@ -144,7 +144,7 @@ export function ProductsSection() {
               className="group"
             >
               <Link href="/product/paneer" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.08)] hover:-translate-y-1 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
-                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-gradient-to-b from-[#faf7f2] to-[#f0ebe2]">
+                <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
                   <Image src="/products/paneer/panner1.jpeg" alt="Fresh & Soft Paneer" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                 </div>
                 <div className="p-5 md:p-6 flex flex-col flex-grow text-center">

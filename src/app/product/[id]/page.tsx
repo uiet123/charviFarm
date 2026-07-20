@@ -165,7 +165,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: smoothEase }}
-            className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#5C3A21]/10 relative h-[400px] md:h-[600px] bg-gradient-to-b from-[#faf7f2] to-[#f0ebe2] flex flex-col items-center justify-center p-4 group"
+            className="bg-white rounded-3xl overflow-hidden shadow-xl border border-[#5C3A21]/10 relative h-[400px] md:h-[600px] bg-white flex flex-col items-center justify-center p-4 group"
           >
              <div className="relative w-full h-full">
                <Image src={product.images[currentImageIndex]} alt={product.title} fill className="object-contain p-4 transition-opacity duration-500" />
