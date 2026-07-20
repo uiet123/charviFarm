@@ -3,18 +3,21 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { getTotalItems } = useCart();
 
   const navLinks = [
     { label: 'Home', href: '/' },
     { label: 'Our Products', href: '/products' },
     { label: 'About', href: '/about' },
+    { label: 'FAQ', href: '/faq' },
     { label: 'Contact', href: '/contact' },
   ];
 
@@ -44,10 +47,26 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5 md:gap-6">
+          <Link 
+            href="/cart"
+            className="relative p-2 rounded-full bg-[#f5f0e8] hover:bg-[#5C3A21] hover:text-white text-[#2C1A0E] transition-colors flex items-center justify-center shadow-sm border border-[#5C3A21]/10"
+          >
+            <ShoppingCart size={22} />
+            {getTotalItems() > 0 && (
+              <motion.span 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -top-1 -right-1 bg-[#D4AF37] text-[#2C1A0E] text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm"
+              >
+                {getTotalItems()}
+              </motion.span>
+            )}
+          </Link>
+
           <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="tel:9871206163" className="hidden sm:flex items-center gap-2 bg-[#5C3A21] text-white px-5 py-2.5 rounded-lg hover:bg-[#D4AF37] hover:text-[#2C1A0E] transition-all duration-400 font-semibold shadow-md text-sm">
             <Phone size={16} />
-            <span>Order Now</span>
+            <span>Call Us</span>
           </motion.a>
 
           <button 
@@ -82,17 +101,6 @@ export default function Navbar() {
                 </Link>
               ))}
               
-              <motion.a
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
-                href="tel:9871206163" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-4 w-full flex items-center justify-center gap-3 bg-[#5C3A21] text-white px-8 py-4 rounded-xl font-bold shadow-xl active:scale-95 transition-transform"
-              >
-                <Phone size={20} />
-                Order Now: 9871206163
-              </motion.a>
             </div>
           </motion.div>
         )}

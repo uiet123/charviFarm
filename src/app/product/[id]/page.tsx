@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, Lock, Plus, Minus, X, Check, Droplets, Leaf, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, use } from "react";
+import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -13,7 +15,7 @@ const productsData = {
     title: "Pure Desi Ghee",
     subtitle: "Made from Pure Buffalo Milk",
     images: ["/products/ghee/ghee1.jpeg", "/products/ghee/ghee2.jpeg"],
-    price: 1800,
+    price: 1200,
     unit: "kg",
     status: "available",
     description: "Experience the authentic taste and aroma of our Pure Desi Buffalo Ghee, hand-churned using the traditional Bilona method. Packed with nutrients and crafted without any preservatives or artificial flavors, it brings pure tradition straight to your home."
@@ -55,6 +57,12 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
   const [orderQuantity, setOrderQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  const { cart, updateQuantity } = useCart();
+  const router = useRouter();
+  
+  const cartItem = cart[id];
+  const currentQuantity = cartItem?.quantity || 0;
 
   if (!product) {
     return (
@@ -118,20 +126,27 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 </button>
               </div>
 
-              <div className="flex justify-between items-center mb-8 px-2">
-                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Total Amount</span>
-                <span className="text-2xl md:text-3xl font-bold text-[#5C3A21]">₹{((product.price || 0) * orderQuantity).toLocaleString('en-IN')}</span>
+              <div className="flex justify-between items-center mb-2 px-2">
+                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Subtotal</span>
+                <span className="text-lg md:text-xl font-bold text-[#5C3A21]">₹{((product.price || 0) * orderQuantity).toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between items-center mb-6 px-2">
+                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Shipping</span>
+                <span className="text-lg md:text-xl font-bold text-[#5C3A21]">₹100</span>
+              </div>
+              <div className="flex justify-between items-center mb-8 px-2 pt-4 border-t border-[#5C3A21]/10">
+                <span className="text-[#2C1A0E]/50 text-sm md:text-base font-bold uppercase tracking-widest">Total Amount</span>
+                <span className="text-2xl md:text-3xl font-bold text-[#5C3A21]">₹{(((product.price || 0) * orderQuantity) + 100).toLocaleString('en-IN')}</span>
               </div>
 
               <button
                 onClick={() => {
-                  const msg = `Hi, I want to order ${orderQuantity} ${product.unit} of ${product.title}. The total amount is ₹${((product.price || 0) * orderQuantity).toLocaleString('en-IN')}.`;
-                  window.open(`https://wa.me/919871206163?text=${encodeURIComponent(msg)}`, '_blank');
+                  window.location.href = `/checkout?buyNow=${id}&quantity=${orderQuantity}`;
                   setIsCheckoutModalOpen(false);
                 }}
                 className="w-full py-4 rounded-xl bg-[#5C3A21] text-white font-bold text-center flex items-center justify-center gap-3 hover:bg-[#D4AF37] hover:text-[#2C1A0E] hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_20px_rgba(92,58,33,0.25)] text-base uppercase tracking-wider"
               >
-                Checkout via WhatsApp
+                Proceed to Checkout
               </button>
             </motion.div>
           </motion.div>
@@ -159,7 +174,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
              {product.images.length > 1 && (
                <>
                  {/* Arrows */}
-                 <div className="absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
+                 <div className="absolute inset-y-0 left-0 right-0 flex justify-between items-center px-4 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none">
                    <button
                      onClick={() => setCurrentImageIndex((prev) => (prev === 0 ? product.images.length - 1 : prev - 1))}
                      className="p-2 rounded-full bg-white/80 text-[#5C3A21] shadow-md hover:bg-white hover:scale-110 transition-all backdrop-blur-sm pointer-events-auto"
@@ -217,16 +232,57 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
 
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
                {product.status === "available" ? (
-                 <button
-                    onClick={() => {
-                      setOrderQuantity(1);
-                      setIsCheckoutModalOpen(true);
-                    }}
-                    className="flex-1 px-8 py-4 rounded-xl bg-[#5C3A21] text-white font-bold text-center flex items-center justify-center gap-3 hover:bg-[#D4AF37] hover:text-[#2C1A0E] transition-all duration-300 shadow-lg text-lg cursor-pointer"
-                  >
-                    <ShoppingBag size={20} />
-                    Shop Now
-                  </button>
+                 <div className="flex w-full gap-4">
+                   {currentQuantity === 0 ? (
+                     <button
+                        onClick={() => {
+                          updateQuantity({
+                            id: id,
+                            name: product.title,
+                            price: product.price || 0,
+                            image: product.images[0],
+                          }, 1);
+                        }}
+                        className="flex-1 px-4 py-4 rounded-xl bg-white text-[#5C3A21] font-bold text-center flex items-center justify-center gap-2 hover:bg-[#f5f0e8] transition-all duration-300 shadow-md border-2 border-[#5C3A21] text-lg cursor-pointer"
+                      >
+                        <ShoppingBag size={20} />
+                        Add to Cart
+                      </button>
+                   ) : (
+                      <div className="flex-1 flex items-center justify-between bg-[#f5f0e8] py-2 px-4 rounded-xl shadow-inner border border-[#5C3A21]/20">
+                        <button 
+                          onClick={() => updateQuantity(cartItem, currentQuantity - 1)}
+                          className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-[#2C1A0E] shadow-sm hover:scale-105 active:scale-95 transition-all"
+                        >
+                          <Minus size={18} strokeWidth={2.5} />
+                        </button>
+                        <span className="text-2xl font-bold font-playfair text-[#2C1A0E] w-10 text-center">{currentQuantity}</span>
+                        <button 
+                          onClick={() => updateQuantity(cartItem, currentQuantity + 1)}
+                          className="w-10 h-10 rounded-full bg-[#5C3A21] flex items-center justify-center text-white shadow-sm hover:bg-[#D4AF37] hover:text-[#2C1A0E] hover:scale-105 active:scale-95 transition-all"
+                        >
+                          <Plus size={18} strokeWidth={2.5} />
+                        </button>
+                      </div>
+                   )}
+                   
+                   <button
+                      onClick={() => {
+                        if (currentQuantity === 0) {
+                          updateQuantity({
+                            id: id,
+                            name: product.title,
+                            price: product.price || 0,
+                            image: product.images[0],
+                          }, 1);
+                        }
+                        router.push("/cart");
+                      }}
+                      className="flex-1 px-4 py-4 rounded-xl bg-[#5C3A21] text-white font-bold text-center flex items-center justify-center gap-2 hover:bg-[#D4AF37] hover:text-[#2C1A0E] transition-all duration-300 shadow-lg text-lg cursor-pointer"
+                    >
+                      Buy Now
+                    </button>
+                 </div>
                ) : (
                   <div className="flex-1 px-8 py-4 rounded-xl bg-[#5C3A21]/15 text-[#2C1A0E]/40 font-bold text-center flex items-center justify-center gap-2 text-lg cursor-not-allowed border border-[#5C3A21]/10">
                     <Lock size={18} />

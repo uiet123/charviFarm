@@ -60,3 +60,14 @@ body {
   0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
   50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.4); }
 }
+
+.animate-marquee-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee-scroll 25s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(100vw); }
+  to { transform: translateX(-100%); }
+}

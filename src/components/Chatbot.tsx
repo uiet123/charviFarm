@@ -47,9 +47,9 @@ export default function Chatbot() {
         if (isPriceQuery) botResponse = "The price for Pure Sarso Oil will be announced soon! It's currently marked as 'Coming Soon'.";
         else botResponse = "Our Kacchi Ghani Wood Pressed Sarso Oil is coming soon!";
       } else if (isPriceQuery || lowerInput.includes("ghee kitne")) {
-        botResponse = "Our Pure Desi Buffalo Ghee is priced at ₹1,800 per kg. We offer free delivery in Delhi.";
+        botResponse = "Our Pure Desi Buffalo Ghee is priced at ₹1,200 per kg. Delivery charges are ₹100 in Delhi.";
       } else if (lowerInput.includes("delivery") || lowerInput.includes("shipping")) {
-        botResponse = "We provide FREE home delivery across Delhi! Orders are typically delivered within 24-48 hours.";
+        botResponse = "We provide home delivery across Delhi for a flat ₹100 charge. Orders are typically delivered within 24-48 hours.";
       } else if (lowerInput.includes("pure") || lowerInput.includes("quality") || lowerInput.includes("bilona")) {
         botResponse = "Our ghee is 100% pure and unadulterated. We use the traditional Bilona method, hand-churning curd from buffalo milk without any additives.";
       } else if (lowerInput.includes("contact") || lowerInput.includes("phone") || lowerInput.includes("call") || lowerInput.includes("number")) {

@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, ShoppingBag, Star, Award, Droplets, Leaf, Shield, Truck, Clock } from "lucide-react";
+import { Phone, ShoppingBag, Star, Award, Droplets, Leaf, Shield, Truck, Clock, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import Lenis from "lenis";
 import { ProductsSection, AboutSection, ContactSection } from "@/components/HomeSections";
@@ -13,13 +13,16 @@ const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
   const [fadeSplash, setFadeSplash] = useState(false);
+  const [currentBanner, setCurrentBanner] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start end", "end start"],
-  });
-  const heroParallax = useTransform(heroProgress, [0, 1], [0, -80]);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setCurrentBanner((prev) => (prev + 1) % 2);
+    }, 10000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -72,120 +75,84 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero Banner */}
-      <section ref={heroRef} className="relative min-h-[85vh] md:min-h-[90vh] flex items-center bg-gradient-to-br from-[#f5f0e8] via-[#ede6d8] to-[#e8dfd0] overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-             <defs>
-               <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-                 <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" strokeWidth="1"/>
-               </pattern>
-             </defs>
-             <rect width="100%" height="100%" fill="url(#grid)" />
-          </svg>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full z-10 relative pt-12 pb-20 lg:py-0">
+      {/* Banners Carousel */}
+      <section className="relative w-full overflow-hidden bg-[#3E2714] h-[85vh] md:h-auto md:aspect-[21/9]">
+        <AnimatePresence initial={false} custom={direction}>
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: smoothEase, delay: 1.8 }}
-            className="max-w-xl text-center lg:text-left flex flex-col items-center lg:items-start"
+            key={currentBanner}
+            custom={direction}
+            initial={{ x: direction > 0 ? "100%" : "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: direction > 0 ? "-100%" : "100%", zIndex: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full z-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5C3A21]/10 text-[#5C3A21] font-bold tracking-wider text-[10px] md:text-xs mb-6 border border-[#5C3A21]/15">
-              <Leaf size={14} className="text-[#D4AF37]" />
-              SIDHE KISAAN KE GHAR SE • 100% SHUDHTA KE SATH
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-playfair font-extrabold leading-[1.08] mb-6 text-[#2C1A0E]">
-              <span className="block">Experience</span>
-              <span className="relative inline-block mt-1">
-                <span className="relative z-10 italic" style={{
-                  background: 'linear-gradient(to right, #5C3A21, #D4AF37, #5C3A21, #D4AF37)',
-                  backgroundSize: '200% auto',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  animation: 'shine 5s linear infinite',
-                }}>Purity</span>
-              </span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-[#2C1A0E]/65 mb-4 font-playfair italic font-semibold">
-              Pure Desi Buffalo Ghee
-            </p>
-            
-            <p className="text-sm md:text-base text-[#2C1A0E]/55 mb-8 max-w-md leading-relaxed font-light">
-              Hand-churned using the ancient Bilona method. No powder, no mixing — just pure, traditional goodness delivered straight to your home.
-            </p>
-            
-            <div className="flex flex-row gap-3 md:gap-4 items-center justify-center lg:justify-start w-full">
-              <Link href="/products">
-                <motion.div whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }} className="bg-[#5C3A21] text-white px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-bold tracking-wide flex items-center gap-2.5 shadow-lg hover:bg-[#D4AF37] hover:text-[#2C1A0E] transition-all duration-400 text-sm md:text-base cursor-pointer">
-                  <ShoppingBag className="w-4 h-4 md:w-5 md:h-5" /> Shop Now
-                </motion.div>
-              </Link>
-              <motion.a whileHover={{ scale: 1.05, y: -3 }} whileTap={{ scale: 0.95 }} href="tel:9871206163" className="border-2 border-[#5C3A21]/25 text-[#2C1A0E] px-6 md:px-8 py-3.5 md:py-4 rounded-lg font-semibold tracking-wide flex items-center gap-2.5 hover:bg-[#5C3A21] hover:text-white hover:border-[#5C3A21] transition-all duration-400 text-sm md:text-base">
-                <Phone className="w-4 h-4 md:w-5 md:h-5" /> Call Us
-              </motion.a>
-            </div>
+            {/* Desktop Banners */}
+            <Image
+              src={currentBanner === 0 ? "/banner_1.png" : "/banner_2.png"}
+              alt={`Banner ${currentBanner + 1}`}
+              fill
+              className="hidden md:block object-cover"
+              priority
+            />
+            {/* Mobile Phone Banners */}
+            <Image
+              src={currentBanner === 0 ? "/phone_banner_1_v3.png" : "/phone_banner_2.png"}
+              alt={`Banner ${currentBanner + 1}`}
+              fill
+              className={`block md:hidden object-cover ${currentBanner === 0 ? 'custom-banner-pos' : 'object-center'}`}
+              priority
+            />
           </motion.div>
+        </AnimatePresence>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1.5, ease: smoothEase, delay: 2 }}
-            className="relative lg:h-[600px] h-[350px] md:h-[450px] w-full group"
-          >
-            <motion.div style={{ y: heroParallax }} className="relative w-full h-full">
-              <Image 
-                src="/ghee-pic.png" 
-                alt="Charvi Farm Pure Desi Buffalo Ghee" 
-                fill 
-                className="object-contain drop-shadow-[0_20px_50px_rgba(92,58,33,0.2)] group-hover:scale-[1.03] transition-transform duration-[1.5s] ease-out"
-                priority
-              />
-            </motion.div>
+        {/* Navigation Arrows */}
+        <button
+          onClick={() => {
+            setDirection(-1);
+            setCurrentBanner((prev) => (prev - 1 + 2) % 2);
+          }}
+          aria-label="Previous slide"
+          className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-black/10 sm:bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 sm:text-white shadow-sm sm:shadow-lg transition-all duration-300"
+        >
+          <ChevronLeft className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+        </button>
+        <button
+          onClick={() => {
+            setDirection(1);
+            setCurrentBanner((prev) => (prev + 1) % 2);
+          }}
+          aria-label="Next slide"
+          className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-black/10 sm:bg-white/20 hover:bg-white/40 backdrop-blur-md rounded-full flex items-center justify-center text-white/70 sm:text-white shadow-sm sm:shadow-lg transition-all duration-300"
+        >
+          <ChevronRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+        </button>
 
-            {/* Floating quality badge */}
-            <motion.div 
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-4 md:top-10 left-0 md:left-4 z-20 bg-white/95 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 border border-[#D4AF37]/25"
-            >
-              <div className="w-9 h-9 rounded-full bg-[#D4AF37]/15 flex items-center justify-center text-[#D4AF37]">
-                <Award size={18} />
-              </div>
-              <div>
-                <p className="text-[9px] text-[#2C1A0E]/50 font-bold uppercase tracking-wider">Quality</p>
-                <p className="font-bold text-[#2C1A0E] text-sm">Premium Grade</p>
-              </div>
-            </motion.div>
-
-            {/* Floating price badge */}
-            <motion.div 
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute bottom-8 md:bottom-16 right-0 md:right-4 z-20 bg-[#5C3A21] text-white px-5 py-3 rounded-xl shadow-lg flex items-center gap-3"
-            >
-              <div>
-                <p className="text-[9px] text-white/60 font-bold uppercase tracking-wider">Price</p>
-                <p className="font-bold text-[#D4AF37] text-xl">₹1,800<span className="text-xs text-white/50 font-normal">/kg</span></p>
-              </div>
-            </motion.div>
-          </motion.div>
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+          {[0, 1].map((index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentBanner(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-400 ease-in-out ${currentBanner === index ? "bg-[#D4AF37] w-8 md:w-10" : "bg-white/60 hover:bg-white w-2.5"
+                }`}
+            />
+          ))}
         </div>
       </section>
+
+
 
       {/* Scrolling Marquee */}
       <div className="bg-[#5C3A21] py-4 overflow-hidden whitespace-nowrap shadow-inner">
         <motion.div
           animate={{ x: ["0%", "-50%"] }}
           transition={{ duration: 25, ease: "linear", repeat: Infinity }}
-          className="flex items-center gap-12 text-base md:text-lg font-playfair italic text-[#D4AF37]"
+          className="flex items-center gap-6 md:gap-12 text-sm md:text-lg font-playfair italic text-[#D4AF37]"
         >
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="flex items-center gap-12 flex-shrink-0">
+            <div key={i} className="flex items-center gap-6 md:gap-12 flex-shrink-0">
               <span>Shudh Buffalo Ghee</span>
               <Star size={12} className="fill-[#D4AF37] flex-shrink-0" />
               <span>Ghar Tak</span>
@@ -207,7 +174,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true, amount: 0.5 }}
-            className="text-center mb-14"
+            className="text-center mb-10 md:mb-14"
           >
             <h2 className="text-3xl md:text-5xl font-playfair font-bold text-[#2C1A0E] mb-3">Why Charvi Farm?</h2>
             <div className="w-16 h-1 bg-[#D4AF37] mx-auto rounded-full"></div>
@@ -240,11 +207,63 @@ export default function Home() {
       </section>
 
       <ProductsSection />
+
+      {/* Video Section */}
+      <section className="py-10 md:py-12 bg-[#5C3A21] relative overflow-hidden flex items-center min-h-[70vh] md:min-h-[80vh]">
+        <div className="max-w-4xl mx-auto px-6 relative z-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true, amount: 0.5 }}
+            className="text-center mb-8 md:mb-10"
+          >
+            <h2 className="text-3xl md:text-5xl font-playfair font-bold text-[#D4AF37] mb-3">Our Story in Motion</h2>
+            <div className="w-16 h-1 bg-[#D4AF37] mx-auto rounded-full mb-5"></div>
+            <p className="text-white/80 text-sm md:text-base max-w-2xl mx-auto font-light leading-relaxed">
+              Experience the pure, traditional process behind Charvi Farm's premium Bilona Ghee. Watch how we bring 100% purity from our farm straight to your home.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: smoothEase }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="relative rounded-xl md:rounded-2xl overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.4)] border border-[#D4AF37]/30 aspect-video bg-black/50 backdrop-blur-sm group mx-auto max-h-[50vh] md:max-h-[60vh]"
+          >
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-[1.02]"
+            >
+              <source src="/charvi_video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </motion.div>
+        </div>
+
+        {/* Background Decorative Elements */}
+        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-[0.03]">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid-white" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="#FFFFFF" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-white)" />
+          </svg>
+        </div>
+      </section>
       <AboutSection />
       <ContactSection />
 
-      {/* CSS for shine animation */}
+      {/* CSS for custom object position and shine animation */}
       <style jsx global>{`
+        .custom-banner-pos {
+          object-position: center 65% !important;
+        }
         @keyframes shine {
           to { background-position: 200% center; }
         }

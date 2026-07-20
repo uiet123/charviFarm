@@ -33,7 +33,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-white/65 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed"
           >
-            Ready to taste pure tradition? Call us or send a WhatsApp message to order your jar of premium buffalo ghee. We provide free home delivery across Delhi.
+            Ready to taste pure tradition? Call us or send a WhatsApp message to order your jar of premium buffalo ghee. We provide home delivery across Delhi (₹100 shipping charge).
           </motion.p>
           
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -72,11 +72,14 @@ export default function ContactPage() {
             </motion.a>
 
             {/* Address */}
-            <motion.div
+            <motion.a
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               whileHover={{ scale: 1.03, y: -5 }}
+              href="https://www.google.com/maps/place/28%C2%B042'12.9%22N+77%C2%B004'18.6%22E/@28.7035701,77.0692608,17z/data=!3m1!4b1!4m4!3m3!8m2!3d28.7035701!4d77.0718357?hl=en&entry=ttu&g_ep=EgoyMDI2MDcxNS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl flex flex-col items-center hover:bg-white hover:text-[#2C1A0E] group transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-full bg-[#D4AF37] text-[#2C1A0E] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
@@ -86,8 +89,29 @@ export default function ContactPage() {
               <p className="text-white/70 group-hover:text-[#2C1A0E]/70 text-sm leading-relaxed text-center">
                 B1/22 Aman Vihar,<br/>Kirari Suleman Nagar,<br/>Delhi, India 110086
               </p>
-            </motion.div>
+              <span className="text-[#D4AF37] group-hover:text-[#2C1A0E] text-xs font-semibold mt-4">Get Directions →</span>
+            </motion.a>
           </div>
+
+          {/* Map Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-16 w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden border border-white/20 shadow-2xl relative z-10 bg-white/5 backdrop-blur-sm p-2"
+          >
+            <div className="w-full h-full rounded-2xl overflow-hidden">
+              <iframe 
+                src="https://maps.google.com/maps?q=28.7035701,77.0718357&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen={true} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
     </div>

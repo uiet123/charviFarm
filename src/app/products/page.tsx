@@ -62,20 +62,27 @@ export default function ProductsPage() {
                 </button>
               </div>
 
-              <div className="flex justify-between items-center mb-8 px-2">
-                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Total Amount</span>
-                <span className="text-2xl md:text-3xl font-bold text-[#5C3A21]">₹{(1800 * orderQuantity).toLocaleString('en-IN')}</span>
+              <div className="flex justify-between items-center mb-2 px-2">
+                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Subtotal</span>
+                <span className="text-lg md:text-xl font-bold text-[#5C3A21]">₹{(1200 * orderQuantity).toLocaleString('en-IN')}</span>
+              </div>
+              <div className="flex justify-between items-center mb-6 px-2">
+                <span className="text-[#2C1A0E]/50 text-xs md:text-sm font-bold uppercase tracking-widest">Shipping</span>
+                <span className="text-lg md:text-xl font-bold text-[#5C3A21]">₹100</span>
+              </div>
+              <div className="flex justify-between items-center mb-8 px-2 pt-4 border-t border-[#5C3A21]/10">
+                <span className="text-[#2C1A0E]/50 text-sm md:text-base font-bold uppercase tracking-widest">Total Amount</span>
+                <span className="text-2xl md:text-3xl font-bold text-[#5C3A21]">₹{(1200 * orderQuantity + 100).toLocaleString('en-IN')}</span>
               </div>
 
               <button
                 onClick={() => {
-                  const msg = `Hi, I want to order ${orderQuantity} kg of Pure Desi Buffalo Ghee. The total amount is ₹${(1800 * orderQuantity).toLocaleString('en-IN')}.`;
-                  window.open(`https://wa.me/919871206163?text=${encodeURIComponent(msg)}`, '_blank');
+                  window.location.href = `/checkout?buyNow=ghee&quantity=${orderQuantity}`;
                   setIsCheckoutModalOpen(false);
                 }}
                 className="w-full py-4 rounded-xl bg-[#5C3A21] text-white font-bold text-center flex items-center justify-center gap-3 hover:bg-[#D4AF37] hover:text-[#2C1A0E] hover:-translate-y-1 transition-all duration-300 shadow-[0_10px_20px_rgba(92,58,33,0.25)] text-base uppercase tracking-wider"
               >
-                Checkout via WhatsApp
+                Proceed to Checkout
               </button>
             </motion.div>
           </motion.div>
@@ -115,7 +122,7 @@ export default function ProductsPage() {
                   <p className="text-[#5C3A21]/60 text-xs font-medium mb-1">Made from Pure Buffalo Milk</p>
                   <h3 className="text-xl md:text-2xl font-bold font-playfair text-[#2C1A0E] mb-3">Pure Desi Ghee</h3>
                   <div className="flex items-baseline justify-center gap-2 mb-5">
-                    <span className="text-2xl font-bold text-[#5C3A21]">₹1,800</span>
+                    <span className="text-2xl font-bold text-[#5C3A21]">₹1,200</span>
                     <span className="text-[#2C1A0E]/35 text-sm font-medium">/kg</span>
                   </div>
                   <button
