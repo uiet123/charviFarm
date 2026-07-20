@@ -97,7 +97,7 @@ export default function Home() {
             />
             {/* Mobile Phone Banners */}
             <Image
-              src={currentBanner === 0 ? "/phone_banner_1_v3.png" : "/phone_banner_2.png"}
+              src={currentBanner === 0 ? "/phone_banner_1_v3.png" : "/phone_banner_2_new.png"}
               alt={`Banner ${currentBanner + 1}`}
               fill
               className={`block md:hidden object-cover ${currentBanner === 0 ? 'custom-banner-pos' : 'object-center'}`}
