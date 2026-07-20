@@ -65,7 +65,11 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-white/25 text-xs">
           <p>&copy; {new Date().getFullYear()} Charvi Farm Dairy. All rights reserved.</p>
-          <p>100% Farm Fresh Guarantee</p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p>100% Farm Fresh Guarantee</p>
+            <span className="hidden md:inline text-white/10">|</span>
+            <p>Powered by <span className="font-bold tracking-wider text-white/40">Pricodex Technologies</span></p>
+          </div>
         </div>
       </motion.div>
     </footer>
