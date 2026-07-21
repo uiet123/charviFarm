@@ -32,7 +32,7 @@ export default function Navbar() {
         <Link href="/">
           <motion.div whileHover={{ scale: 1.03 }} className="flex items-center gap-3 cursor-pointer group">
             <div className="relative w-11 h-11 md:w-12 md:h-12 overflow-hidden rounded-full shadow-md group-hover:shadow-lg transition-all duration-500 border-2 border-[#D4AF37]/40">
-              <Image src="/logo.png" alt="Charvi Farm Logo" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+              <Image src="/logo_new.jpeg" alt="Charvi Farm Logo" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
             </div>
             <span className="font-playfair font-bold text-xl md:text-2xl tracking-tight text-[#2C1A0E]">Charvi Farm</span>
           </motion.div>

@@ -79,7 +79,7 @@ export default function Chatbot() {
             <div className="bg-[#5C3A21] text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center overflow-hidden">
-                  <Image src="/logo.png" alt="Bot" width={32} height={32} className="object-cover" />
+                  <Image src="/logo_new.jpeg" alt="Bot" width={32} height={32} className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-sm tracking-wide">Charvi Farm Assistant</h4>

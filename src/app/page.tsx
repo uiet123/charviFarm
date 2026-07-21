@@ -67,7 +67,7 @@ export default function Home() {
               className="flex flex-col items-center gap-4"
             >
               <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_40px_rgba(212,175,55,0.4)]">
-                <Image src="/logo.png" alt="Charvi Farm" fill className="object-cover" />
+                <Image src="/logo_new.jpeg" alt="Charvi Farm" fill className="object-cover" />
               </div>
               <span className="font-playfair text-[#D4AF37] text-2xl tracking-wider">Charvi Farm</span>
             </motion.div>
@@ -97,7 +97,7 @@ export default function Home() {
             />
             {/* Mobile Phone Banners */}
             <Image
-              src={currentBanner === 0 ? "/phone_banner_1_v3.png" : "/phone_banner_2_new.png"}
+              src={currentBanner === 0 ? "/banner1.0.png" : "/phone_banner_2_new.png"}
               alt={`Banner ${currentBanner + 1}`}
               fill
               className={`block md:hidden object-cover ${currentBanner === 0 ? 'custom-banner-pos' : 'object-center'}`}

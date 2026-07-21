@@ -19,7 +19,7 @@ export default function Footer() {
           {/* About */}
           <div className="lg:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-3 mb-5">
-              <Image src="/logo.png" alt="Charvi Farm" width={44} height={44} className="rounded-full object-cover border-2 border-[#D4AF37]/40" />
+              <Image src="/logo_new.jpeg" alt="Charvi Farm" width={44} height={44} className="rounded-full object-cover border-2 border-[#D4AF37]/40" />
               <span className="font-playfair font-bold text-2xl">Charvi Farm</span>
             </div>
             <p className="text-white/50 text-sm max-w-md leading-relaxed mb-6">
