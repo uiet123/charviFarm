@@ -14,7 +14,7 @@ const productsData = {
   ghee: {
     title: "Pure Desi Ghee",
     subtitle: "Made from Pure Buffalo Milk",
-    images: ["/products/ghee/ghee1.jpeg", "/products/ghee/ghee2.jpeg"],
+    images: ["/products/ghee/ghee_product.jpeg"],
     price: 1200,
     unit: "kg",
     status: "available",

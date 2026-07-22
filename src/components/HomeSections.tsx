@@ -39,7 +39,7 @@ export function ProductsSection() {
             >
               <Link href="/product/ghee" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.12)] hover:-translate-y-2 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
                 <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
-                  <Image src="/products/ghee/ghee1.jpeg" alt="Pure Desi Buffalo Ghee" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
+                  <Image src="/products/ghee/ghee_product.jpeg" alt="Pure Desi Buffalo Ghee" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                   <div className="absolute top-3 left-3 bg-[#D4AF37] text-[#2C1A0E] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-md shadow-md">
                     Best Seller
                   </div>
@@ -55,7 +55,7 @@ export function ProductsSection() {
                   <div className="mt-auto" onClick={(e) => e.preventDefault()}>
                     {gheeInCart === 0 ? (
                       <button
-                        onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee1.jpeg' }, 1)}
+                        onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee_product.jpeg' }, 1)}
                         className="w-fit mx-auto px-8 py-3 rounded-lg bg-[#5C3A21] text-white font-bold text-center flex items-center justify-center gap-2 hover:bg-[#D4AF37] hover:text-[#2C1A0E] transition-all duration-300 shadow-md text-sm cursor-pointer"
                       >
                         <ShoppingBag size={15} />
@@ -64,14 +64,14 @@ export function ProductsSection() {
                     ) : (
                       <div className="flex items-center justify-center gap-3 sm:gap-4 bg-[#f5f0e8] py-2 px-2 rounded-xl shadow-inner border border-[#5C3A21]/10 w-fit mx-auto">
                         <button 
-                          onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee1.jpeg' }, gheeInCart - 1)}
+                          onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee_product.jpeg' }, gheeInCart - 1)}
                           className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#2C1A0E] shadow-sm hover:scale-105 transition-transform active:scale-95 border border-[#5C3A21]/15"
                         >
                           <Minus size={16} strokeWidth={2.5} />
                         </button>
                         <span className="text-xl font-bold font-playfair text-[#2C1A0E] w-6 text-center">{gheeInCart}</span>
                         <button 
-                          onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee1.jpeg' }, gheeInCart + 1)}
+                          onClick={() => updateQuantity({ id: 'ghee', name: 'Pure Desi Ghee', price: 1200, image: '/products/ghee/ghee_product.jpeg' }, gheeInCart + 1)}
                           className="w-8 h-8 rounded-full bg-[#5C3A21] flex items-center justify-center text-white shadow-md hover:scale-105 hover:bg-[#D4AF37] transition-all active:scale-95"
                         >
                           <Plus size={16} strokeWidth={2.5} />

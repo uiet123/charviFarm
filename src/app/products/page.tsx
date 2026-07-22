@@ -40,7 +40,7 @@ export default function ProductsPage() {
               
               <div className="flex flex-col items-center text-center mb-8">
                 <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4 bg-[#f5f0e8]">
-                  <Image src="/products/ghee/ghee1.jpeg" alt="Premium Buffalo Ghee" fill className="object-cover" />
+                  <Image src="/products/ghee/ghee_product.jpeg" alt="Premium Buffalo Ghee" fill className="object-cover" />
                 </div>
                 <h3 className="font-playfair text-2xl md:text-3xl font-bold text-[#2C1A0E] mb-2 tracking-tight">Complete Order</h3>
                 <p className="text-[#2C1A0E]/60 text-sm font-light max-w-[250px]">How many kg of Pure Desi Ghee would you like?</p>
@@ -113,7 +113,7 @@ export default function ProductsPage() {
             >
               <Link href="/product/ghee" className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_10px_40px_rgba(92,58,33,0.12)] hover:-translate-y-2 transition-all duration-500 flex flex-col h-full border border-[#5C3A21]/8 block cursor-pointer">
                 <div className="relative h-[300px] sm:h-[320px] overflow-hidden bg-white">
-                  <Image src="/products/ghee/ghee1.jpeg" alt="Pure Desi Buffalo Ghee" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
+                  <Image src="/products/ghee/ghee_product.jpeg" alt="Pure Desi Buffalo Ghee" fill className="object-contain group-hover:scale-105 transition-transform duration-[1.2s] ease-out" />
                   <div className="absolute top-3 left-3 bg-[#D4AF37] text-[#2C1A0E] text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-md shadow-md">
                     Best Seller
                   </div>

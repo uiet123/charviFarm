@@ -51,7 +51,7 @@ function CheckoutPageContent() {
           id: "ghee",
           name: "Pure Desi Ghee",
           price: 1200,
-          image: "/products/ghee/ghee1.jpeg",
+          image: "/products/ghee/ghee_product.jpeg",
           quantity: quantity,
         },
       ]);
