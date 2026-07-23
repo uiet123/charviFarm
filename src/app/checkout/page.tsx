@@ -122,6 +122,17 @@ function CheckoutPageContent() {
     formData.pincode.trim().length === 6 &&
     screenshot !== null;
 
+  const getValidationMessage = () => {
+    if (formData.name.trim() === "") return "Please enter your full name to proceed.";
+    if (formData.phone.trim().length < 10) return "Please enter a valid 10-digit phone number.";
+    if (formData.address.trim() === "") return "Please enter your delivery address.";
+    if (formData.city.trim() === "") return "Please enter your city.";
+    if (formData.state.trim() === "") return "Please enter your state.";
+    if (formData.pincode.trim().length !== 6) return "Please enter a valid 6-digit pincode.";
+    if (!screenshot) return "Please upload your payment screenshot.";
+    return null;
+  };
+
   // Handle Form Submission / Redirect to WhatsApp
   const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -525,6 +536,14 @@ function CheckoutPageContent() {
                   </div>
                 )}
               </div>
+
+              {/* Validation Message */}
+              {!isFormValid && (
+                <div className="bg-red-50 text-red-600 text-sm p-4 rounded-xl border border-red-100 flex items-start gap-2 shadow-sm">
+                  <Info size={18} className="shrink-0 mt-0.5" />
+                  <p>{getValidationMessage()}</p>
+                </div>
+              )}
 
               {/* Complete Payment Button */}
               <button
